@@ -12,7 +12,7 @@ use Symfony\Component\Serializer\Annotation\Groups;
     normalizationContext: ['groups' => ['read:collection']],
     itemOperations: [
         'get' => [
-            'normalization_context' => ['groups' => ['read:collection', 'read:item', 'read:post']]
+            'normalization_context' => ['groups' => ['read:collection', 'read:item', 'read:Post']]
         ] 
     ]
 )]

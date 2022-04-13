@@ -16,11 +16,11 @@ class Category
     #[ORM\Id]
     #[ORM\GeneratedValue]
     #[ORM\Column(type: 'integer')]
-    #[Groups(['read:post'])]
+    #[Groups(['read:Post'])]
     private $id;
 
     #[ORM\Column(type: 'string', length: 255)]
-    #[Groups(['read:post'])]
+    #[Groups(['read:Post'])]
     private $namename;
 
     #[ORM\OneToMany(mappedBy: 'category', targetEntity: Post::class)]
