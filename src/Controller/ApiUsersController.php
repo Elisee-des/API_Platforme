@@ -86,16 +86,32 @@ class ApiUsersController extends AbstractController
     public function fetch_users($id, UsersRepository $usersRepo): Response
     {
         $user = $usersRepo->find($id);
-        $datajson = json_encode($user);
-        if (
-            property_exists($datajson, "username") &&
-            property_exists($datajson, "password") &&
-            property_exists($datajson,"email")
-        ) {
-            
-            return $this->json(["Success" => true, "data" => $user], 200);
-        }
+        // $datajson = json_encode($user);
 
-        return $this->json(["Success" => false, "data" => "Cette personne n'existe pas"], 404);
+        // if (
+        //     property_exists($datajson, "username") &&
+        //     property_exists($datajson, "password") &&
+        //     property_exists($datajson,"email")
+        // ) {
+
+        //     return $this->json(["Success" => true, "data" => $user], 200);
+        // }
+
+        return $this->json(["Success" => false, "data" => $user], 200);
+    }
+
+    /**
+     * @Route("/api/delete_users/{id}", name="api_users_delete", methods={"DELETE"})
+     */
+    public function delete_users($id, UsersRepository $usersRepo, ManagerRegistry $managerRegistry): Response
+    {
+        $user = $usersRepo->find($id);
+
+        $em = $managerRegistry->getManager();
+        $em->remove($user);
+        $em->flush();
+
+
+        return $this->json(["Success" => true, "Message" => "User supprimer avec success"], 200);
     }
 }
